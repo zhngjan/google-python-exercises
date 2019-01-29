@@ -49,14 +49,14 @@ import sys
 ###
 
 def print_words(filename):
-  # file_obj = open(filename)
-  # file_content_list = file_obj.read().split()
-  # file_obj.close()
   cnt_dct = count_filecontent(filename)
   for key in sorted(cnt_dct.keys()):
     print key, ' ', cnt_dct.get(key)
 
 def count_filecontent(filename):
+  # file_obj = open(filename)
+  # file_content_list = file_obj.read().split()
+  # file_obj.close()
   file_content_list = []
   with open(filename, 'r') as f:
     for line in f.readlines():

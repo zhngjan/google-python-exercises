@@ -1,4 +1,6 @@
 .idea
 *.pyc
 
-.log
+*.log
+*.summary
+*.zip

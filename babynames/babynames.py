@@ -41,7 +41,31 @@ def extract_names(filename):
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
   # +++your code here+++
-  return
+  rs = parse_file(filename)
+  new_filename = filename + '.summary'
+  save_file(new_filename, rs)
+
+def save_file(filename, data):
+  print data
+  txt = '\n'.join(data) + '\n'
+  print txt
+  with open(filename, 'w') as f:
+    f.write(txt)
+
+def parse_file(filename):
+  p_year = r'Popularity\sin\s(\d\d\d\d)'
+  p_names = r'<td>(\d+)</td><td>(\w+)</td>\<td>(\w+)</td>'
+  with open(filename, 'r') as f:
+    content = f.read()
+  c_year = re.search(p_year, content).group(1)
+  rs = [c_year]
+  name_tuples = re.findall(p_names, content)
+  name_rank = {}
+  for name_tuple in name_tuples:
+    name_rank[name_tuple[1]] = name_tuple[0]
+    name_rank[name_tuple[2]] = name_tuple[0]
+  rs.extend([k + ' ' + v for k, v in name_rank.items()])
+  return rs
 
 
 def main():
@@ -63,6 +87,8 @@ def main():
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
+  for filename in args:
+    extract_names(filename)
   
 if __name__ == '__main__':
   main()
